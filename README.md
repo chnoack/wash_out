@@ -118,8 +118,8 @@ class RumbasController < ApplicationController
   def dump_parameters
     Rails.logger.debug params.inspect
   end
-  
-  
+
+
   # Rendering SOAP headers
   soap_action "integer_to_header_string",
               :args   => :integer,
@@ -128,7 +128,7 @@ class RumbasController < ApplicationController
   def integer_to_header_string
     render :soap => params[:value].to_s, :header => (params[:value]+1).to_s
   end
-  
+
   # Reading SOAP Headers
   # This is different than normal SOAP params, because we don't specify the incoming format of the header,
   # but we can still access it through `soap_request.headers`.  Note that the values are all strings or hashes.
@@ -161,7 +161,7 @@ class RumbasController < ApplicationController
 
     render :soap => nil
   end
-  
+
 end
 ```
 
@@ -217,7 +217,7 @@ inside your interface declarations.
 
 ## WSSE Authentication
 
-WashOut provides two mechanism for WSSE Authentication. 
+WashOut provides two mechanism for WSSE Authentication.
 
 ### Static Authentication
 
@@ -255,6 +255,7 @@ Available properties are:
 * **snakecase_input**: Determines if WashOut should modify parameters keys to snakecase. Default is `false`.
 * **camelize_wsdl**: Determines if WashOut should camelize types within WSDL and responses. Supports `true` for CamelCase and `:lower` for camelCase. Default is `false`.
 * **service_name**: Allows to define a custom name for the SOAP service. By default, the name is set as `service`.
+* **service_port_name**: Allows to define a custom name for the SOAP service port. By default, the name is set as `service_port`.
 
 ### Camelization
 
