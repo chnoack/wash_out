@@ -18,7 +18,8 @@ module WashOut
       service_name: 'service',
       service_port_name: 'service_port',
       service_binding_name: nil,
-      service_port_type_name: nil
+      service_port_type_name: nil,
+      service_show_soap_action: true
     }
 
     attr_reader :config

@@ -50,7 +50,7 @@ xml.definitions 'xmlns' => 'http://schemas.xmlsoap.org/wsdl/',
     xml.tag! "soap:binding", :style => 'document', :transport => 'http://schemas.xmlsoap.org/soap/http'
     @map.keys.each do |operation|
       xml.operation :name => operation do
-        xml.tag! "soap:operation", :soapAction => operation
+        xml.tag! "soap:operation", :soapAction => @service_show_soap_action ? operation : ''
         xml.input do
           xml.tag! "soap:body",
             :use => "literal",
