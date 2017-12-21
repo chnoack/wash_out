@@ -16,7 +16,9 @@ module WashOut
       wsse_auth_callback: nil,
       soap_action_routing: true,
       service_name: 'service',
-      service_port_name: 'service_port'
+      service_port_name: 'service_port',
+      service_binding_name: nil,
+      service_port_type_name: nil
     }
 
     attr_reader :config
