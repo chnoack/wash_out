@@ -20,29 +20,29 @@ xml.definitions 'xmlns' => 'http://schemas.xmlsoap.org/wsdl/',
   end
 
   @map.each do |operation, formats|
-    xml.message :name => "#{operation}" do
+    xml.message :name => "#{@service_port_type_name}_#{operation}" do
       formats[:in].each do |p|
         xml.part wsdl_occurence(p, true, :name => p.name, :type => p.namespaced_type)
       end
     end
-    xml.message :name => formats[:response_tag] do
+    xml.message :name => "#{@service_port_type_name}_#{formats[:response_tag]}" do
       formats[:out].each do |p|
         xml.part wsdl_occurence(p, true, :name => p.name, :type => p.namespaced_type)
       end
     end
   end
 
-  xml.portType :name => "#{@name}_port" do
+  xml.portType :name => "#{@service_port_type_name}" do
     @map.each do |operation, formats|
       xml.operation :name => operation do
-        xml.input :message => "tns:#{operation}"
-        xml.output :message => "tns:#{formats[:response_tag]}"
+        xml.input :message => "tns:#{@service_port_type_name}_#{operation}"
+        xml.output :message => "tns:#{@service_port_type_name}_#{formats[:response_tag]}"
       end
     end
   end
 
   binding_name = @service_binding_name || "#{@name}_binding"
-  xml.binding :name => binding_name, :type => "tns:#{@name}_port" do
+  xml.binding :name => binding_name, :type => "tns:#{@service_port_type_name}" do
     xml.tag! "soap:binding", :style => 'rpc', :transport => 'http://schemas.xmlsoap.org/soap/http'
     @map.keys.each do |operation|
       xml.operation :name => operation do
